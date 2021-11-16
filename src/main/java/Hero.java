@@ -15,7 +15,9 @@ public class Hero {
         textGraphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new
-                        TerminalPosition(position.getX(), position.getY()), "X");
+                TerminalPosition(position.getX() * 2, position.getY() * 2), "\\/");
+        textGraphics.putString(new
+                TerminalPosition(position.getX() * 2, position.getY() * 2 + 1), "/\\");
     }
 
     public Position moveUp(){
