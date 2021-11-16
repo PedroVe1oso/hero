@@ -1,6 +1,7 @@
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.screen.Screen;
 
+
 public class Hero {
     private Position position;
 
