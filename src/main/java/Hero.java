@@ -5,8 +5,7 @@ public class Hero {
     private Position position;
 
     public Hero(int x, int y) {
-        position.setX(x);
-        position.setY(y);
+        position = new Position(x, y);
     }
 
     public void draw(Screen screen){
