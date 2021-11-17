@@ -1,6 +1,6 @@
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
+
 
 
 public class Hero {
