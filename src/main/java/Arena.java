@@ -19,13 +19,13 @@ public class Arena {
     public void draw(TextGraphics textGraphics){
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new
-                TerminalSize(height, width), ' ');
+                TerminalSize(width, height), ' ');
         hero.draw(textGraphics);
     }
     private boolean canHeroMove(Position position){
-        return position.getX() < height &&
+        return position.getX() < width &&
                 position.getX() >= 0 &&
-                position.getY() < width &&
+                position.getY() < height &&
                 position.getY() >= 0;
     }
 

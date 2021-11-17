@@ -26,7 +26,7 @@ public class Game{
         screen.startScreen();
         screen.doResizeIfNecessary();
 
-        arena = new Arena(0, 0, 10, 5);
+        arena = new Arena(0, 0, 10, 10);
     }
 
     public void run() throws IOException {
