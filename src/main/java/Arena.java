@@ -42,9 +42,14 @@ public class Arena {
     private List<Coin> createCoins() {
         Random random = new Random();
         List<Coin> coins = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
-            coins.add(new Coin(random.nextInt(width - 2) +
-                    1, random.nextInt(height - 2) + 1));
+        Coin coin;
+        for (int i = 0; i < 5; i++) {
+            do{
+                coin = new Coin(random.nextInt(width - 2) +
+                        1, random.nextInt(height - 2) + 1);
+            }while ((!canCreateCoin(coin.getPosition())));
+            coins.add(coin);
+        }
         return coins;
     }
 
@@ -68,6 +73,18 @@ public class Arena {
             }
         }
         return flag;
+    }
+
+    private boolean canCreateCoin(Position position){
+        boolean result = !position.equals(hero.getPosition());
+        if (coins != null) {
+            for (Coin coin : coins)
+                if (coin.getPosition().equals(position)) {
+                    result = false;
+                    break;
+                }
+        }
+        return result;
     }
 
     public void moveHero(Position position) {
@@ -104,28 +121,7 @@ public class Arena {
             }
         }*/
     }
-
-    public Hero getHero() {
-        return hero;
-    }
-
     public void setHero(Position position) {
         hero.setPosition(position);
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
     }
 }
