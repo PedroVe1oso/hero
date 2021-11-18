@@ -53,18 +53,6 @@ public class Arena {
         return coins;
     }
 
-    private boolean canHeroMove(Position position){
-        boolean flag = true;
-        for (Wall wall : walls) {
-            if (wall.getPosition().equals(position)) {
-                flag = false;
-                break;
-            }
-        }
-
-        return flag;
-    }
-
     private boolean canCreateCoin(Position position){
         boolean result = !position.equals(hero.getPosition());
         if (coins != null) {
@@ -85,6 +73,18 @@ public class Arena {
             }
     }
 
+    private boolean canHeroMove(Position position){
+        boolean flag = true;
+        for (Wall wall : walls) {
+            if (wall.getPosition().equals(position)) {
+                flag = false;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
     public void moveHero(Position position) {
         if(canHeroMove(position)) {
             setHero(position);
@@ -102,7 +102,6 @@ public class Arena {
         for (Coin coin : coins)
             coin.draw(textGraphics);
     }
-
 
     public void processKey(KeyStroke key){
         switch (key.getKeyType()) {
