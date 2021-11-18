@@ -29,20 +29,6 @@ public class Game{
         arena = new Arena(2, 2, 10, 10);
     }
 
-    public void run() throws IOException {
-        while(true){
-            draw();
-            KeyStroke key = screen.readInput();
-            processKey(key);
-            if ((key.getKeyType() == KeyType.Character && key.getCharacter() == 'q')
-                || key.getKeyType() == KeyType.EOF) {
-                screen.close();
-                break;
-            }
-        }
-
-    }
-
     private void draw() throws IOException {
         screen.clear();
         arena.draw(screen.newTextGraphics());
@@ -51,5 +37,19 @@ public class Game{
 
     private void processKey(KeyStroke key){
         arena.processKey(key);
+    }
+
+    public void run() throws IOException {
+        while(true){
+            draw();
+            KeyStroke key = screen.readInput();
+            processKey(key);
+            if ((key.getKeyType() == KeyType.Character && key.getCharacter() == 'q')
+                    || key.getKeyType() == KeyType.EOF) {
+                screen.close();
+                break;
+            }
+        }
+
     }
 }
