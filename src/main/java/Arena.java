@@ -7,6 +7,8 @@ import com.googlecode.lanterna.input.KeyStroke;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Random;
+
 public class Arena {
     private int height;
     private int width;
@@ -14,12 +16,14 @@ public class Arena {
     private Hero hero;
 
     private List<Wall> walls;
+    private List<Coin> coins;
 
     public Arena(int x, int y, int height, int width) {
         hero = new Hero(x,y);
         this.height = height;
         this.width = width;
         this.walls = createWalls();
+        this.coins = createCoins();
     }
 
     private List<Wall> createWalls() {
@@ -35,6 +39,15 @@ public class Arena {
         return walls;
     }
 
+    private List<Coin> createCoins() {
+        Random random = new Random();
+        List<Coin> coins = new ArrayList<>();
+        for (int i = 0; i < 5; i++)
+            coins.add(new Coin(random.nextInt(width - 2) +
+                    1, random.nextInt(height - 2) + 1));
+        return coins;
+    }
+
     public void draw(TextGraphics textGraphics){
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new
@@ -42,6 +55,8 @@ public class Arena {
         hero.draw(textGraphics);
         for (Wall wall : walls)
             wall.draw(textGraphics);
+        for (Coin coin : coins)
+            coin.draw(textGraphics);
     }
 
     private boolean canHeroMove(Position position){
