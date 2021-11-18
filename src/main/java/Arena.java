@@ -53,17 +53,6 @@ public class Arena {
         return coins;
     }
 
-    public void draw(TextGraphics textGraphics){
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
-        textGraphics.fillRectangle(new TerminalPosition(0, 0), new
-                TerminalSize(width, height), ' ');
-        hero.draw(textGraphics);
-        for (Wall wall : walls)
-            wall.draw(textGraphics);
-        for (Coin coin : coins)
-            coin.draw(textGraphics);
-    }
-
     private boolean canHeroMove(Position position){
         boolean flag = true;
         for (Wall wall : walls) {
@@ -72,6 +61,7 @@ public class Arena {
                 break;
             }
         }
+
         return flag;
     }
 
@@ -87,10 +77,32 @@ public class Arena {
         return result;
     }
 
-    public void moveHero(Position position) {
-        if(canHeroMove(position))
-            setHero(position);
+    private void retrieveCoins(){
+        for (Coin coin : coins)
+            if (coin.getPosition().equals(hero.getPosition())) {
+                coins.remove(coin);
+                break;
+            }
     }
+
+    public void moveHero(Position position) {
+        if(canHeroMove(position)) {
+            setHero(position);
+        }
+    }
+
+    public void draw(TextGraphics textGraphics){
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        textGraphics.fillRectangle(new TerminalPosition(0, 0), new
+                TerminalSize(width, height), ' ');
+        hero.draw(textGraphics);
+        retrieveCoins();
+        for (Wall wall : walls)
+            wall.draw(textGraphics);
+        for (Coin coin : coins)
+            coin.draw(textGraphics);
+    }
+
 
     public void processKey(KeyStroke key){
         switch (key.getKeyType()) {
