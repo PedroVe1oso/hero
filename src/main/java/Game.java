@@ -16,7 +16,7 @@ public class Game{
 
 
     public Game() throws IOException {
-        terminalSize = new TerminalSize(20, 20);
+        terminalSize = new TerminalSize(50, 50);
         DefaultTerminalFactory terminalFactory = new
                 DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize);
@@ -26,7 +26,7 @@ public class Game{
         screen.startScreen();
         screen.doResizeIfNecessary();
 
-        arena = new Arena(2, 2, 10, 10);
+        arena = new Arena(10, 10, 50, 50);
     }
 
     private void draw() throws IOException {
@@ -40,16 +40,20 @@ public class Game{
     }
 
     public void run() throws IOException {
+        KeyStroke key;
         while(true){
             draw();
-            KeyStroke key = screen.readInput();
+            key = screen.readInput();
             processKey(key);
+            if(arena.verifyMonsterCollisions()){
+                screen.close();
+                break;
+            }
             if ((key.getKeyType() == KeyType.Character && key.getCharacter() == 'q')
                     || key.getKeyType() == KeyType.EOF) {
                 screen.close();
                 break;
             }
         }
-
     }
 }

@@ -32,4 +32,5 @@ public class Hero extends Element{
         textGraphics.putString(new
                 TerminalPosition(getPosition().getX(), getPosition().getY()), "X");
     }
+
 }
